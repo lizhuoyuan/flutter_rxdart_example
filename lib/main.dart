@@ -41,7 +41,7 @@ class MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
     contactBLoc = ContactBLoC();
-    //contactBLoc.getContacts();
+    contactBLoc.getContacts();
   }
 
   @override
