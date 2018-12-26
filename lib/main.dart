@@ -35,13 +35,16 @@ class MyHomePageState extends State<MyHomePage> {
   ContactBLoC contactBLoc;
 
   List<Contact> contacts;
+  bool _isInit = false;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    contactBLoc = ContactBLoC();
-    contactBLoc.getContacts();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isInit) {
+      contactBLoc = BLoCProvider.ofContact(context);
+      contactBLoc.getContacts();
+      _isInit = true;
+    }
   }
 
   @override
@@ -70,7 +73,7 @@ class MyHomePageState extends State<MyHomePage> {
           contactBLoc.getContacts();
         },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.refresh),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

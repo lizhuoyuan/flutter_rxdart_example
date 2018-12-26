@@ -13,12 +13,11 @@ class ContactBLoC {
 
   var _subject = BehaviorSubject<List<Contact>>();
 
-  Stream<List<Contact>> get contacts => _subject.stream;
+  Observable<List<Contact>> get contacts => _subject.stream;
 
   Future getContacts() async {
     var response = await HttpUtil().get('get_contacts');
     List data = response['data'];
-    print(data);
     _contacts = List<Contact>();
     data.forEach((item) => _contacts.add(Contact.fromJson(item)));
     _subject.add(_contacts);
